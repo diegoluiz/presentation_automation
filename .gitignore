@@ -1,0 +1,7 @@
+.vagrant/
+.terraform/
+
+*.log
+*.gz
+*.tgz
+*.box

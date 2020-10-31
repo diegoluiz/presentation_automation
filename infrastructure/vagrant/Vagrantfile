@@ -1,0 +1,71 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+Vagrant.configure(2) do |config|  
+  
+  # config.vm.define "master" do |m|
+  #   m.vm.box = "ubuntu/bionic64"
+
+  #   config.vm.provider "virtualbox" do |vb|
+  #     vb.memory = "2048"
+  #   end
+
+  #   config.vm.provision "shell", inline: <<-SHELL
+  #     sudo apt-get update
+  #     sudo apt-get install -y htop
+  #   SHELL
+
+  # end
+
+  (1..2).each do |i|
+    config.vm.define "etcd-#{i}" do |m|
+      m.vm.box = "generic/ubuntu1810"
+      # config.vm.network "private_network", ip: "192.168.33.#{i + 30}"
+
+      config.vm.provider "virtualbox" do |vb|
+        vb.memory = "1024"
+      end
+
+      config.vm.provision "shell", inline: <<-SHELL
+        sudo apt-get update
+        sudo apt-get install -y htop
+      SHELL
+
+    end
+  end
+
+  # (1..2).each do |i|
+  #   config.vm.define "master-#{i}" do |m|
+  #     m.vm.box = "generic/ubuntu1810"
+  #     config.vm.network "private_network", ip: "192.168.33.#{i + 10}"
+
+  #     config.vm.provider "virtualbox" do |vb|
+  #       vb.memory = "1024"
+  #     end
+
+  #     config.vm.provision "shell", inline: <<-SHELL
+  #       sudo apt-get update
+  #       sudo apt-get install -y htop
+  #     SHELL
+
+  #   end
+  # end
+
+  # (1..3).each do |i|
+  #   config.vm.define "node-#{i}" do |m|
+  #     m.vm.box = "generic/ubuntu1810"
+  #     config.vm.network "private_network", ip: "192.168.33.2#{i}"
+
+  #     config.vm.provider "virtualbox" do |vb|
+  #       vb.memory = "1024"
+  #     end
+
+  #     config.vm.provision "shell", inline: <<-SHELL
+  #       sudo apt-get update
+  #       sudo apt-get install -y htop
+  #     SHELL
+
+  #   end
+  # end
+end
